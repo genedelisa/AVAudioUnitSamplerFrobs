@@ -6,7 +6,7 @@
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/tablebinding.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
 [![GitHub release](https://img.shields.io/github/release/genedelisa/tablebinding.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
 
-An example using
+Several simple examples for using `AVAudioUnitSampler`.
 
 
 ## Blog post for this example.

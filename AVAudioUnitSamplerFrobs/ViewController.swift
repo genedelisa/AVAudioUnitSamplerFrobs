@@ -9,10 +9,27 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var sampler1:Sampler1!
+    
+    var samplerSequence:SamplerSequence!
+    
+    var drumMachine:DrumMachine!
+    
+    var duet:Duet!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        sampler1 = Sampler1()
+        samplerSequence = SamplerSequence()
+        
+        drumMachine = DrumMachine()
+        
+        duet = Duet()
+        
+        let meta = AudioMeta()
+        meta.show()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +38,29 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func sampler1Down(sender: UIButton) {
+        sampler1.play()
+    }
+    
+    @IBAction func sampler1Up(sender: UIButton) {
+        sampler1.stop()
+    }
+    
+    @IBAction func samplerSequence(sender: UIButton) {
+        samplerSequence.play()
+    }
+    
+    @IBAction func drumMachinePlay(sender: UIButton) {
+        drumMachine.play()
+    }
+
+    @IBAction func duetDown(sender: UIButton) {
+        duet.play()
+    }
+    @IBAction func duetUp(sender: UIButton) {
+        duet.stop()
+    }
+
+    
 }
 

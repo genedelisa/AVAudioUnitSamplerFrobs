@@ -9,14 +9,14 @@
 import Foundation
 import AVFoundation
 
-class SamplerSequence : NSObject {
+class DrumMachine : NSObject {
     
     var engine: AVAudioEngine!
     
     var sampler: AVAudioUnitSampler!
     
-        var sequencer:AVAudioSequencer!
-
+    var sequencer:AVAudioSequencer!
+    
     override init() {
         super.init()
         
@@ -25,10 +25,10 @@ class SamplerSequence : NSObject {
         sampler = AVAudioUnitSampler()
         engine.attachNode(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
-
+        
         setupSequencer()
         
-        loadSamples()
+        loadPreset()
         
         addObservers()
         
@@ -60,6 +60,12 @@ class SamplerSequence : NSObject {
     }
     
     func play() {
+        if sequencer.playing {
+            stop()
+        }
+        
+        sequencer.currentPositionInBeats = NSTimeInterval(0)
+        
         do {
             try sequencer.start()
         } catch {
@@ -72,25 +78,17 @@ class SamplerSequence : NSObject {
     }
     
     
-    //AUSampler - Controlling the Settings of the AUSampler in Real Time
-    //https://developer.apple.com/library/ios/technotes/tn2331/_index.html
-    
-    //https://developer.apple.com/videos/play/wwdc2011-411/ video on creating aupreset
-    
-    //if you name your sample violinC4.wav, your sample will be assigned to note number 60.
-    func loadSamples() {
+    func loadPreset()  {
         
-        if let urls = NSBundle.mainBundle().URLsForResourcesWithExtension("wav", subdirectory: "wavs") {
-            do {
-                try sampler.loadAudioFilesAtURLs(urls)
-                
-                for u in urls {
-                    print("loaded wav \(u)")
-                }
-
-            } catch let error as NSError {
-                print("\(error.localizedDescription)")
-            }
+        guard let preset = NSBundle.mainBundle().URLForResource("Drums", withExtension: "aupreset") else {
+            print("could not load aupreset")
+            return
+        }
+        
+        do {
+            try sampler.loadInstrumentAtURL(preset)
+        } catch {
+            print("error loading preset")
         }
     }
     
@@ -273,5 +271,5 @@ class SamplerSequence : NSObject {
         
         return musicSequence
     }
-
+    
 }

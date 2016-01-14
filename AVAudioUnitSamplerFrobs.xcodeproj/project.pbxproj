@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B0A1004E1C4688A70092CBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */; };
 		B0A100501C4688A70092CBE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004F1C4688A70092CBE9 /* ViewController.swift */; };
-		B0A100531C4688A70092CBE9 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B0A100521C4688A70092CBE9 /* README.md */; };
 		B0A100551C4688A70092CBE9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B0A100541C4688A70092CBE9 /* LICENSE */; };
 		B0A100571C4688A70092CBE9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B0A100561C4688A70092CBE9 /* .gitignore */; };
 		B0A100591C4688A70092CBE9 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B0A100581C4688A70092CBE9 /* .travis.yml */; };
@@ -18,6 +17,17 @@
 		B0A100611C4688A70092CBE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A1005F1C4688A70092CBE9 /* LaunchScreen.storyboard */; };
 		B0A1006C1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1006B1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests.swift */; };
 		B0A100771C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100761C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift */; };
+		B0A100851C4688BE0092CBE9 /* Sampler1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100841C4688BE0092CBE9 /* Sampler1.swift */; };
+		B0A100871C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */; };
+		B0A100891C469C830092CBE9 /* wavs in Resources */ = {isa = PBXBuildFile; fileRef = B0A100881C469C830092CBE9 /* wavs */; };
+		B0A1008B1C469E720092CBE9 /* sibeliusGMajor.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */; };
+		B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0A1008C1C46A3770092CBE9 /* chromatic.mid */; };
+		B0A1008F1C46A93C0092CBE9 /* SamplerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */; };
+		B0A100921C4715BD0092CBE9 /* Drums.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = B0A100901C4715BD0092CBE9 /* Drums.aupreset */; };
+		B0A100931C4715BD0092CBE9 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = B0A100911C4715BD0092CBE9 /* Sounds */; };
+		B0A100951C4715E00092CBE9 /* DrumMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100941C4715E00092CBE9 /* DrumMachine.swift */; };
+		B0A100971C47BA990092CBE9 /* Duet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100961C47BA990092CBE9 /* Duet.swift */; };
+		B0A100991C47BAAC0092CBE9 /* AudioMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +65,17 @@
 		B0A100721C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVAudioUnitSamplerFrobsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A100761C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioUnitSamplerFrobsUITests.swift; sourceTree = "<group>"; };
 		B0A100781C4688A70092CBE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0A100841C4688BE0092CBE9 /* Sampler1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sampler1.swift; sourceTree = "<group>"; };
+		B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
+		B0A100881C469C830092CBE9 /* wavs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = wavs; path = AVAudioUnitSamplerFrobs/wavs; sourceTree = "<group>"; };
+		B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = sibeliusGMajor.mid; sourceTree = "<group>"; };
+		B0A1008C1C46A3770092CBE9 /* chromatic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic.mid; sourceTree = "<group>"; };
+		B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplerSequence.swift; sourceTree = "<group>"; };
+		B0A100901C4715BD0092CBE9 /* Drums.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Drums.aupreset; path = AVAudioUnitSamplerFrobs/Drums.aupreset; sourceTree = "<group>"; };
+		B0A100911C4715BD0092CBE9 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = AVAudioUnitSamplerFrobs/Sounds; sourceTree = "<group>"; };
+		B0A100941C4715E00092CBE9 /* DrumMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrumMachine.swift; sourceTree = "<group>"; };
+		B0A100961C47BA990092CBE9 /* Duet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duet.swift; sourceTree = "<group>"; };
+		B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +106,9 @@
 		B0A100411C4688A70092CBE9 = {
 			isa = PBXGroup;
 			children = (
+				B0A100901C4715BD0092CBE9 /* Drums.aupreset */,
+				B0A100911C4715BD0092CBE9 /* Sounds */,
+				B0A100881C469C830092CBE9 /* wavs */,
 				B0A1004C1C4688A70092CBE9 /* AVAudioUnitSamplerFrobs */,
 				B0A1006A1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests */,
 				B0A100751C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests */,
@@ -105,6 +129,9 @@
 		B0A1004C1C4688A70092CBE9 /* AVAudioUnitSamplerFrobs */ = {
 			isa = PBXGroup;
 			children = (
+				B0A1008C1C46A3770092CBE9 /* chromatic.mid */,
+				B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */,
+				B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */,
 				B0A1004F1C4688A70092CBE9 /* ViewController.swift */,
 				B0A1005A1C4688A70092CBE9 /* Main.storyboard */,
@@ -112,6 +139,11 @@
 				B0A1005F1C4688A70092CBE9 /* LaunchScreen.storyboard */,
 				B0A100621C4688A70092CBE9 /* Info.plist */,
 				B0A100511C4688A70092CBE9 /* Supporting Files */,
+				B0A100841C4688BE0092CBE9 /* Sampler1.swift */,
+				B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */,
+				B0A100941C4715E00092CBE9 /* DrumMachine.swift */,
+				B0A100961C47BA990092CBE9 /* Duet.swift */,
+				B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */,
 			);
 			path = AVAudioUnitSamplerFrobs;
 			sourceTree = "<group>";
@@ -252,8 +284,14 @@
 				B0A100591C4688A70092CBE9 /* .travis.yml in Resources */,
 				B0A100571C4688A70092CBE9 /* .gitignore in Resources */,
 				B0A100551C4688A70092CBE9 /* LICENSE in Resources */,
+				B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */,
+				B0A1008B1C469E720092CBE9 /* sibeliusGMajor.mid in Resources */,
 				B0A100611C4688A70092CBE9 /* LaunchScreen.storyboard in Resources */,
+				B0A100931C4715BD0092CBE9 /* Sounds in Resources */,
+				B0A100921C4715BD0092CBE9 /* Drums.aupreset in Resources */,
 				B0A1005C1C4688A70092CBE9 /* Main.storyboard in Resources */,
+				B0A100891C469C830092CBE9 /* wavs in Resources */,
+				B0A100871C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				B0A1005E1C4688A70092CBE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,9 +317,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0A100531C4688A70092CBE9 /* README.md in Sources */,
+				B0A100951C4715E00092CBE9 /* DrumMachine.swift in Sources */,
 				B0A100501C4688A70092CBE9 /* ViewController.swift in Sources */,
+				B0A100851C4688BE0092CBE9 /* Sampler1.swift in Sources */,
 				B0A1004E1C4688A70092CBE9 /* AppDelegate.swift in Sources */,
+				B0A1008F1C46A93C0092CBE9 /* SamplerSequence.swift in Sources */,
+				B0A100991C47BAAC0092CBE9 /* AudioMeta.swift in Sources */,
+				B0A100971C47BA990092CBE9 /* Duet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     
     var samplerSequence:SamplerSequence!
     
+    var samplerSequenceOTF:SamplerSequenceOTF!
+    
     var drumMachine:DrumMachine!
     
     var duet:Duet!
@@ -22,14 +24,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         sampler1 = Sampler1()
+        
         samplerSequence = SamplerSequence()
+        
+        samplerSequenceOTF = SamplerSequenceOTF()
         
         drumMachine = DrumMachine()
         
         duet = Duet()
-        
-        let meta = AudioMeta()
-        meta.show()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +52,11 @@ class ViewController: UIViewController {
     @IBAction func samplerSequence(sender: UIButton) {
         samplerSequence.play()
     }
+    
+    @IBAction func samplerSequenceOTF(sender: UIButton) {
+        samplerSequenceOTF.play()
+    }
+
     
     @IBAction func drumMachinePlay(sender: UIButton) {
         drumMachine.play()

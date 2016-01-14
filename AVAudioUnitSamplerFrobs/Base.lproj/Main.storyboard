@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8X-lR-NzS">
-                                <rect key="frame" x="266" y="245" width="69" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8X-lR-NzS">
+                                <rect key="frame" x="233.5" y="205" width="133" height="190"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyR-b7-Wkm">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="133" height="30"/>
                                         <state key="normal" title="Sampler 1"/>
                                         <connections>
                                             <action selector="sampler1Down:" destination="BYZ-38-t0r" eventType="touchDown" id="5NF-nH-wLi"/>
@@ -29,21 +29,28 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWE-dg-5cI">
-                                        <rect key="frame" x="0.0" y="40" width="69" height="30"/>
-                                        <state key="normal" title="Sequence"/>
+                                        <rect key="frame" x="0.0" y="40" width="133" height="30"/>
+                                        <state key="normal" title="Sequence from File"/>
                                         <connections>
                                             <action selector="samplerSequence:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2yh-0F-BZA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qN3-Ht-gzX">
+                                        <rect key="frame" x="0.0" y="80" width="133" height="30"/>
+                                        <state key="normal" title="Sequence OTF"/>
+                                        <connections>
+                                            <action selector="samplerSequenceOTF:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZfL-qo-bAI"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCO-v7-4cm">
-                                        <rect key="frame" x="0.0" y="80" width="69" height="30"/>
-                                        <state key="normal" title="Drums"/>
+                                        <rect key="frame" x="0.0" y="120" width="133" height="30"/>
+                                        <state key="normal" title="Drums aupreset"/>
                                         <connections>
                                             <action selector="drumMachinePlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72g-Zz-7f9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lq-ap-RaP">
-                                        <rect key="frame" x="0.0" y="120" width="69" height="30"/>
+                                        <rect key="frame" x="0.0" y="160" width="133" height="30"/>
                                         <state key="normal" title="Duet"/>
                                         <connections>
                                             <action selector="duetDown:" destination="BYZ-38-t0r" eventType="touchDown" id="243-Xq-Egg"/>

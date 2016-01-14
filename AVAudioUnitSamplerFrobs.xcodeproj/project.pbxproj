@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B096DD091C47DEEE00A8CC7A /* SamplerSequenceOTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */; };
 		B0A1004E1C4688A70092CBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */; };
 		B0A100501C4688A70092CBE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004F1C4688A70092CBE9 /* ViewController.swift */; };
 		B0A100551C4688A70092CBE9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B0A100541C4688A70092CBE9 /* LICENSE */; };
@@ -27,7 +28,6 @@
 		B0A100931C4715BD0092CBE9 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = B0A100911C4715BD0092CBE9 /* Sounds */; };
 		B0A100951C4715E00092CBE9 /* DrumMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100941C4715E00092CBE9 /* DrumMachine.swift */; };
 		B0A100971C47BA990092CBE9 /* Duet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100961C47BA990092CBE9 /* Duet.swift */; };
-		B0A100991C47BAAC0092CBE9 /* AudioMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplerSequenceOTF.swift; sourceTree = "<group>"; };
 		B0A1004A1C4688A70092CBE9 /* AVAudioUnitSamplerFrobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVAudioUnitSamplerFrobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0A1004F1C4688A70092CBE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		B0A100911C4715BD0092CBE9 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = AVAudioUnitSamplerFrobs/Sounds; sourceTree = "<group>"; };
 		B0A100941C4715E00092CBE9 /* DrumMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrumMachine.swift; sourceTree = "<group>"; };
 		B0A100961C47BA990092CBE9 /* Duet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duet.swift; sourceTree = "<group>"; };
-		B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,9 +141,9 @@
 				B0A100511C4688A70092CBE9 /* Supporting Files */,
 				B0A100841C4688BE0092CBE9 /* Sampler1.swift */,
 				B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */,
+				B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */,
 				B0A100941C4715E00092CBE9 /* DrumMachine.swift */,
 				B0A100961C47BA990092CBE9 /* Duet.swift */,
-				B0A100981C47BAAC0092CBE9 /* AudioMeta.swift */,
 			);
 			path = AVAudioUnitSamplerFrobs;
 			sourceTree = "<group>";
@@ -322,7 +322,7 @@
 				B0A100851C4688BE0092CBE9 /* Sampler1.swift in Sources */,
 				B0A1004E1C4688A70092CBE9 /* AppDelegate.swift in Sources */,
 				B0A1008F1C46A93C0092CBE9 /* SamplerSequence.swift in Sources */,
-				B0A100991C47BAAC0092CBE9 /* AudioMeta.swift in Sources */,
+				B096DD091C47DEEE00A8CC7A /* SamplerSequenceOTF.swift in Sources */,
 				B0A100971C47BA990092CBE9 /* Duet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +550,7 @@
 				B0A1007D1C4688A70092CBE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0A1007E1C4688A70092CBE9 /* Build configuration list for PBXNativeTarget "AVAudioUnitSamplerFrobsTests" */ = {
 			isa = XCConfigurationList;
@@ -558,6 +559,7 @@
 				B0A100801C4688A70092CBE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0A100811C4688A70092CBE9 /* Build configuration list for PBXNativeTarget "AVAudioUnitSamplerFrobsUITests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +568,7 @@
 				B0A100831C4688A70092CBE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

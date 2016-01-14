@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import AudioToolbox
 
-class SamplerSequence : NSObject {
+class SamplerSequenceOTF : NSObject {
     
     var engine: AVAudioEngine!
     
@@ -46,14 +46,19 @@ class SamplerSequence : NSObject {
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
         let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic", withExtension: "mid") {
+        
+        let musicSequence = createMusicSequence()
+        if let data = sequenceData(musicSequence) {
             do {
-                try sequencer.loadFromURL(fileURL, options: options)
-                print("loaded \(fileURL)")
+                try sequencer.loadFromData(data, options: options)
+                print("loaded \(data)")
             } catch {
                 print("something screwed up \(error)")
                 return
             }
+        } else {
+            print("nil data")
+            return
         }
         
         sequencer.prepareToPlay()
@@ -79,14 +84,8 @@ class SamplerSequence : NSObject {
     }
     
     
-    //AUSampler - Controlling the Settings of the AUSampler in Real Time
-    //https://developer.apple.com/library/ios/technotes/tn2331/_index.html
     
-    //https://developer.apple.com/videos/play/wwdc2011-411/ video on creating aupreset
-    
-    //if you name your sample violinC4.wav, your sample will be assigned to note number 60.
     func loadSamples() {
-        
         if let urls = NSBundle.mainBundle().URLsForResourcesWithExtension("wav", subdirectory: "wavs") {
             do {
                 try sampler.loadAudioFilesAtURLs(urls)
@@ -219,6 +218,83 @@ class SamplerSequence : NSObject {
             let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey]
             print("audio session route change previous \(previous)")
         }
+    }
+    
+    
+    func createMusicSequence() -> MusicSequence {
+        
+        var musicSequence = MusicSequence()
+        var status = NewMusicSequence(&musicSequence)
+        if status != OSStatus(noErr) {
+            print("\(__LINE__) bad status \(status) creating sequence")
+        }
+        
+        // add a track
+        var track = MusicTrack()
+        status = MusicSequenceNewTrack(musicSequence, &track)
+        if status != OSStatus(noErr) {
+            print("error creating track \(status)")
+        }
+        
+        
+        // now make some notes and put them on the track
+        var beat = MusicTimeStamp(0.0)
+        for i:UInt8 in 60...72 {
+            var mess = MIDINoteMessage(channel: 0,
+                note: i,
+                velocity: 64,
+                releaseVelocity: 0,
+                duration: 1.0 )
+            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
+            if status != OSStatus(noErr) {
+                print("creating new midi note event \(status)")
+            }
+            beat++
+        }
+        
+        // hi hat in eighth notes
+        beat = MusicTimeStamp(0.0)
+        for _ in 0...16 {
+            var mess = MIDINoteMessage(channel: 0,
+                note: 63, //D#4 - see the wav names
+                velocity: 127,
+                releaseVelocity: 0,
+                duration: 0.5 )
+            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
+            if status != OSStatus(noErr) {
+                print("creating new midi note event \(status)")
+            }
+            beat += MusicTimeStamp(0.5)
+        }
+        
+        // associate the AUGraph with the sequence.
+        //        MusicSequenceSetAUGraph(musicSequence, self.processingGraph)
+        
+        // Let's see it
+        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence))
+        
+        return musicSequence
+    }
+    
+    /**
+     AVAudioSequencer will not load a MusicSequence, but it will load NSData.
+     */
+    func sequenceData(musicSequence:MusicSequence) -> NSData? {
+        var status = OSStatus(noErr)
+        
+        var data:Unmanaged<CFData>?
+        status = MusicSequenceFileCreateData(musicSequence,
+            MusicSequenceFileTypeID.MIDIType,
+            MusicSequenceFileFlags.EraseFile,
+            480, &data)
+        if status != noErr {
+            print("error turning MusicSequence into NSData")
+            return nil
+        }
+        
+        let ns:NSData = data!.takeUnretainedValue()
+        data?.release()
+        return ns
     }
 
 }

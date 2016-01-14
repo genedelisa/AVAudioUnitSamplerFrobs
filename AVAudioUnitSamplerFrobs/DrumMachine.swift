@@ -97,7 +97,7 @@ class DrumMachine : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return

@@ -62,11 +62,12 @@ class Sampler1 : NSObject {
         
     }
     
+    // might be better to do this in the app delegate
     func setSessionPlayback() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return

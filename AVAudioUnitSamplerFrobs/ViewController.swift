@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var drumMachine:DrumMachine!
     
     var duet:Duet!
+    
+    var synthSequence:SynthSequence!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,8 @@ class ViewController: UIViewController {
         drumMachine = DrumMachine()
         
         duet = Duet()
+        
+        synthSequence = SynthSequence()
 
     }
 
@@ -67,6 +71,10 @@ class ViewController: UIViewController {
     }
     @IBAction func duetUp(sender: UIButton) {
         duet.stop()
+    }
+    
+    @IBAction func synthSequence(sender: UIButton) {
+        synthSequence.play()
     }
 
     

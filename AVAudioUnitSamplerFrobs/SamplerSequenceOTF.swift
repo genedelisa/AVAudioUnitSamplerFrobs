@@ -46,7 +46,6 @@ class SamplerSequenceOTF : NSObject {
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
         let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        
         let musicSequence = createMusicSequence()
         if let data = sequenceData(musicSequence) {
             do {
@@ -220,6 +219,7 @@ class SamplerSequenceOTF : NSObject {
         }
     }
     
+   
     
     func createMusicSequence() -> MusicSequence {
         

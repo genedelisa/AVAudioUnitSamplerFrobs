@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8X-lR-NzS">
-                                <rect key="frame" x="233.5" y="205" width="133" height="190"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8X-lR-NzS">
+                                <rect key="frame" x="234" y="205" width="133" height="230"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyR-b7-Wkm">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="30"/>
@@ -55,6 +55,13 @@
                                         <connections>
                                             <action selector="duetDown:" destination="BYZ-38-t0r" eventType="touchDown" id="243-Xq-Egg"/>
                                             <action selector="duetUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UZh-m1-ooU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUF-Fv-KUh">
+                                        <rect key="frame" x="0.0" y="200" width="133" height="30"/>
+                                        <state key="normal" title="Synth Sequence"/>
+                                        <connections>
+                                            <action selector="synthSequence:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kvI-LN-xvg"/>
                                         </connections>
                                     </button>
                                 </subviews>

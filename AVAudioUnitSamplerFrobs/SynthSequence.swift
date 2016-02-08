@@ -9,28 +9,45 @@
 import Foundation
 import AVFoundation
 import AudioToolbox
+import CoreAudio
 
-class SamplerSequence : NSObject {
+
+class SynthSequence : NSObject {
     
     var engine: AVAudioEngine!
     
-    var sampler: AVAudioUnitSampler!
+    var sampler: AVAudioUnitMIDISynth!
     
     var sequencer:AVAudioSequencer!
+    
+    var midiSynth:AVAudioUnitMIDISynth!
     
     override init() {
         super.init()
         
         engine = AVAudioEngine()
         
-        sampler = AVAudioUnitSampler()
-        engine.attachNode(sampler)
-        engine.connect(sampler, to: engine.mainMixerNode, format: nil)
+        midiSynth = AVAudioUnitMIDISynth()
+        midiSynth.loadMIDISynthSoundFont()
+        var patches = [UInt32]()
+        patches.append(UInt32(0))
+        patches.append(46)
+        midiSynth.loadPatches(patches)
+        
+        engine.attachNode(midiSynth)
+        engine.connect(midiSynth, to: engine.mainMixerNode, format: nil)
+        //        print("audio auaudiounit \(midiSynth.AUAudioUnit)")
+        //        print("audio audiounit \(midiSynth.audioUnit)")
+        print("audio descr \(midiSynth.audioComponentDescription)")
+        
+        
+//        sampler = AVAudioUnitMIDISynth()
+//        engine.attachNode(sampler)
+//        engine.connect(sampler, to: engine.mainMixerNode, format: nil)
         
         setupSequencer()
         
-        loadSamples()
-//        loadSF2PresetIntoSampler(0)
+//        loadSamples()
         
         addObservers()
         
@@ -39,6 +56,13 @@ class SamplerSequence : NSObject {
         print(self.engine)
         
         setSessionPlayback()
+        
+//        var synth = AUMIDISynth()
+        
+
+       
+
+
     }
     
     
@@ -47,7 +71,7 @@ class SamplerSequence : NSObject {
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
         let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic2", withExtension: "mid") {
+        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic", withExtension: "mid") {
             do {
                 try sequencer.loadFromURL(fileURL, options: options)
                 print("loaded \(fileURL)")
@@ -88,38 +112,19 @@ class SamplerSequence : NSObject {
     //if you name your sample violinC4.wav, your sample will be assigned to note number 60.
     func loadSamples() {
         
-        if let urls = NSBundle.mainBundle().URLsForResourcesWithExtension("wav", subdirectory: "wavs") {
-            do {
-                try sampler.loadAudioFilesAtURLs(urls)
-                
-                for u in urls {
-                    print("loaded wav \(u)")
-                }
-                
-            } catch let error as NSError {
-                print("\(error.localizedDescription)")
-            }
-        }
+//        if let urls = NSBundle.mainBundle().URLsForResourcesWithExtension("wav", subdirectory: "wavs") {
+//            do {
+//                try sampler.loadAudioFilesAtURLs(urls)
+//                
+//                for u in urls {
+//                    print("loaded wav \(u)")
+//                }
+//                
+//            } catch let error as NSError {
+//                print("\(error.localizedDescription)")
+//            }
+//        }
     }
-    
-    func loadSF2PresetIntoSampler(preset:UInt8)  {
-        
-        guard let bankURL = NSBundle.mainBundle().URLForResource("GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
-            print("could not load sound font")
-            return
-        }
-        
-        do {
-            try self.sampler.loadSoundBankInstrumentAtURL(bankURL,
-                program: preset,
-                bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
-                bankLSB: UInt8(kAUSampler_DefaultBankLSB))
-        } catch {
-            print("error loading sound bank instrument")
-        }
-        
-    }
-
     
     
     func setSessionPlayback() {

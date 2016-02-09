@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io
 
-**/*.sf2
+*.sf2
+*.SF2
 
 ### Xcode ###
 build/

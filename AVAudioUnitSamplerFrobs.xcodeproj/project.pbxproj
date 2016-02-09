@@ -28,8 +28,6 @@
 		B0A100931C4715BD0092CBE9 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = B0A100911C4715BD0092CBE9 /* Sounds */; };
 		B0A100951C4715E00092CBE9 /* DrumMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100941C4715E00092CBE9 /* DrumMachine.swift */; };
 		B0A100971C47BA990092CBE9 /* Duet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100961C47BA990092CBE9 /* Duet.swift */; };
-		B0BD4E3B1C661AA800B84077 /* AVAudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E3A1C661AA800B84077 /* AVAudioUnitMIDISynth.swift */; };
-		B0BD4E3D1C661B8C00B84077 /* SynthSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E3C1C661B8C00B84077 /* SynthSequence.swift */; };
 		B0BD4E3F1C6621FA00B84077 /* chromatic2.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0BD4E3E1C6621FA00B84077 /* chromatic2.mid */; };
 		B0BD4E411C662A5E00B84077 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0BD4E401C662A5E00B84077 /* CoreAudio.framework */; };
 		B0BD4E4B1C6694FE00B84077 /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B0BD4E4A1C6694FE00B84077 /* FluidR3 GM2-2.SF2 */; };
@@ -81,8 +79,6 @@
 		B0A100911C4715BD0092CBE9 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = AVAudioUnitSamplerFrobs/Sounds; sourceTree = "<group>"; };
 		B0A100941C4715E00092CBE9 /* DrumMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrumMachine.swift; sourceTree = "<group>"; };
 		B0A100961C47BA990092CBE9 /* Duet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duet.swift; sourceTree = "<group>"; };
-		B0BD4E3A1C661AA800B84077 /* AVAudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitMIDISynth.swift; sourceTree = "<group>"; };
-		B0BD4E3C1C661B8C00B84077 /* SynthSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthSequence.swift; sourceTree = "<group>"; };
 		B0BD4E3E1C6621FA00B84077 /* chromatic2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic2.mid; sourceTree = "<group>"; };
 		B0BD4E401C662A5E00B84077 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		B0BD4E4A1C6694FE00B84077 /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
@@ -158,8 +154,6 @@
 				B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */,
 				B0A100941C4715E00092CBE9 /* DrumMachine.swift */,
 				B0A100961C47BA990092CBE9 /* Duet.swift */,
-				B0BD4E3A1C661AA800B84077 /* AVAudioUnitMIDISynth.swift */,
-				B0BD4E3C1C661B8C00B84077 /* SynthSequence.swift */,
 			);
 			path = AVAudioUnitSamplerFrobs;
 			sourceTree = "<group>";
@@ -342,8 +336,6 @@
 				B0A1008F1C46A93C0092CBE9 /* SamplerSequence.swift in Sources */,
 				B096DD091C47DEEE00A8CC7A /* SamplerSequenceOTF.swift in Sources */,
 				B0A100971C47BA990092CBE9 /* Duet.swift in Sources */,
-				B0BD4E3D1C661B8C00B84077 /* SynthSequence.swift in Sources */,
-				B0BD4E3B1C661AA800B84077 /* AVAudioUnitMIDISynth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

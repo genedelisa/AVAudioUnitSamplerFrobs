@@ -2,22 +2,24 @@
 
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://en.wikipedia.org/wiki/MIT_License)
-[![Build Status](https://travis-ci.org/genedelisa/TableBinding.svg)](https://travis-ci.org/genedelisa/AVAudioUnitSamplerFrobs)
-[![GitHub tag](https://img.shields.io/github/tag/genedelisa/tablebinding.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
-[![GitHub release](https://img.shields.io/github/release/genedelisa/tablebinding.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
+[![Build Status](https://travis-ci.org/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://travis-ci.org/genedelisa/AVAudioUnitSamplerFrobs)
+[![GitHub tag](https://img.shields.io/github/tag/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
+[![GitHub release](https://img.shields.io/github/release/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
+[![Swift 2](https://img.shields.io/badge/swift2-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
+
 
 Several simple examples for using `AVAudioUnitSampler`.
 
 
 ## Blog post for this example.
 
-[Blog post](http://www.rockhoppertech.com/blog/)
+[Blog post](http://www.rockhoppertech.com/blog/the-great-avaudiounitsampler-workout/)
 
 
 ## Bugs
 
 
-[![GitHub issues](https://img.shields.io/github/issues/genedelisa/tablebinding.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/issues)
+[![GitHub issues](https://img.shields.io/github/issues/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/issues)
 
 If you find one, [please add it to issues](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/issues)
 

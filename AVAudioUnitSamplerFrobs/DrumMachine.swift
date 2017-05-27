@@ -23,7 +23,7 @@ class DrumMachine : NSObject {
         engine = AVAudioEngine()
         
         sampler = AVAudioUnitSampler()
-        engine.attachNode(sampler)
+        engine.attach(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
         
         setupSequencer()
@@ -44,10 +44,10 @@ class DrumMachine : NSObject {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
-        let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic", withExtension: "mid") {
+        let options = AVMusicSequenceLoadOptions()
+        if let fileURL = Bundle.main.url(forResource: "chromatic", withExtension: "mid") {
             do {
-                try sequencer.loadFromURL(fileURL, options: options)
+                try sequencer.load(from: fileURL, options: options)
                 print("loaded \(fileURL)")
             } catch {
                 print("something screwed up \(error)")
@@ -60,11 +60,11 @@ class DrumMachine : NSObject {
     }
     
     func play() {
-        if sequencer.playing {
+        if sequencer.isPlaying {
             stop()
         }
         
-        sequencer.currentPositionInBeats = NSTimeInterval(0)
+        sequencer.currentPositionInBeats = TimeInterval(0)
         
         do {
             try sequencer.start()
@@ -77,18 +77,20 @@ class DrumMachine : NSObject {
         sequencer.stop()
     }
     
-    
+    // load from the bundle or documents directory only
+    // https://forums.developer.apple.com/message/20748#20643
     func loadPreset()  {
         
-        guard let preset = NSBundle.mainBundle().URLForResource("Drums", withExtension: "aupreset") else {
+        guard let preset = Bundle.main.url(forResource: "Drums", withExtension: "aupreset") else {
             print("could not load aupreset")
             return
         }
+        print("loaded preset \(preset)")
         
         do {
-            try sampler.loadInstrumentAtURL(preset)
+            try sampler.loadInstrument(at: preset)
         } catch {
-            print("error loading preset")
+            print("error loading preset \(error)")
         }
     }
     
@@ -97,7 +99,7 @@ class DrumMachine : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -113,7 +115,7 @@ class DrumMachine : NSObject {
     
     func startEngine() {
         
-        if engine.running {
+        if engine.isRunning {
             print("audio engine already started")
             return
         }
@@ -130,146 +132,153 @@ class DrumMachine : NSObject {
     //MARK: - Notifications
     
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"engineConfigurationChange:",
-            name:AVAudioEngineConfigurationChangeNotification,
-            object:engine)
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(DrumMachine.engineConfigurationChange(_:)),
+                                               name:NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionInterrupted:",
-            name:AVAudioSessionInterruptionNotification,
-            object:engine)
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(DrumMachine.sessionInterrupted(_:)),
+                                               name:NSNotification.Name.AVAudioSessionInterruption,
+                                               object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionRouteChange:",
-            name:AVAudioSessionRouteChangeNotification,
-            object:engine)
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(DrumMachine.sessionRouteChange(_:)),
+                                               name:NSNotification.Name.AVAudioSessionRouteChange,
+                                               object:engine)
     }
     
     func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioEngineConfigurationChangeNotification,
-            object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                                  object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionInterruptionNotification,
-            object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.AVAudioSessionInterruption,
+                                                  object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionRouteChangeNotification,
-            object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.AVAudioSessionRouteChange,
+                                                  object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(notification:NSNotification) {
+    func engineConfigurationChange(_ notification:Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(notification:NSNotification) {
+    func sessionInterrupted(_ notification:Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,Any?> {
             let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
             switch reason {
-            case .Began:
+            case .began:
                 print("began")
-            case .Ended:
+            case .ended:
                 print("ended")
             }
         }
     }
     
-    func sessionRouteChange(notification:NSNotification) {
+    func sessionRouteChange(_ notification:Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,Any?> {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
                 print("audio session route change reason \(reason)")
                 
                 switch reason {
-                case .CategoryChange: print("CategoryChange")
-                case .NewDeviceAvailable:print("NewDeviceAvailable")
-                case .NoSuitableRouteForCategory:print("NoSuitableRouteForCategory")
-                case .OldDeviceUnavailable:print("OldDeviceUnavailable")
-                case .Override: print("Override")
-                case .WakeFromSleep:print("WakeFromSleep")
-                case .Unknown:print("Unknown")
-                case .RouteConfigurationChange:print("RouteConfigurationChange")
+                case .categoryChange: print("CategoryChange")
+                case .newDeviceAvailable:print("NewDeviceAvailable")
+                case .noSuitableRouteForCategory:print("NoSuitableRouteForCategory")
+                case .oldDeviceUnavailable:print("OldDeviceUnavailable")
+                case .override: print("Override")
+                case .wakeFromSleep:print("WakeFromSleep")
+                case .unknown:print("Unknown")
+                case .routeConfigurationChange:print("RouteConfigurationChange")
                 }
             }
             
-            let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey]
-            print("audio session route change previous \(previous)")
+            if let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey] {
+                print("audio session route change previous \(String(describing: previous))")
+            }
         }
     }
     
     
-    func createMusicSequence() -> MusicSequence {
+    func createMusicSequence() -> MusicSequence? {
         
-        var musicSequence = MusicSequence()
-        var status = NewMusicSequence(&musicSequence)
-        if status != OSStatus(noErr) {
-            print("\(__LINE__) bad status \(status) creating sequence")
+        var s:MusicSequence?
+        var status = NewMusicSequence(&s)
+        if status != noErr {
+            print("\(#line) bad status \(status) creating sequence")
         }
         
-        // add a track
-        var track = MusicTrack()
-        status = MusicSequenceNewTrack(musicSequence, &track)
-        if status != OSStatus(noErr) {
-            print("error creating track \(status)")
-        }
-        
-        // bank select msb
-        var chanmess = MIDIChannelMessage(status: 0xB0, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
-            print("creating bank select event \(status)")
-        }
-        // bank select lsb
-        chanmess = MIDIChannelMessage(status: 0xB0, data1: 32, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
-            print("creating bank select event \(status)")
-        }
-        
-        // program change. first data byte is the patch, the second data byte is unused for program change messages.
-        chanmess = MIDIChannelMessage(status: 0xC0, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
-            print("creating program change event \(status)")
-        }
-        
-        // now make some notes and put them on the track
-        var beat = MusicTimeStamp(0.0)
-        for i:UInt8 in 60...72 {
-            var mess = MIDINoteMessage(channel: 0,
-                note: i,
-                velocity: 64,
-                releaseVelocity: 0,
-                duration: 1.0 )
-            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
-            if status != OSStatus(noErr) {
-                print("creating new midi note event \(status)")
+        if let musicSequence = s {
+
+            // add a track
+            var t:MusicTrack?
+            status = MusicSequenceNewTrack(musicSequence, &t)
+            if status != noErr {
+                print("error creating track \(status)")
             }
-            beat++
+            
+            if let track = t {
+                // bank select msb
+                var chanmess = MIDIChannelMessage(status: 0xB0, data1: 0, data2: 0, reserved: 0)
+                status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
+                if status != noErr {
+                    print("creating bank select event \(status)")
+                }
+                // bank select lsb
+                chanmess = MIDIChannelMessage(status: 0xB0, data1: 32, data2: 0, reserved: 0)
+                status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
+                if status != noErr {
+                    print("creating bank select event \(status)")
+                }
+                
+                // program change. first data byte is the patch, the second data byte is unused for program change messages.
+                chanmess = MIDIChannelMessage(status: 0xC0, data1: 0, data2: 0, reserved: 0)
+                status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
+                if status != noErr {
+                    print("creating program change event \(status)")
+                }
+                
+                // now make some notes and put them on the track
+                var beat = MusicTimeStamp(0.0)
+                for i:UInt8 in 60...72 {
+                    var mess = MIDINoteMessage(channel: 0,
+                                               note: i,
+                                               velocity: 64,
+                                               releaseVelocity: 0,
+                                               duration: 1.0 )
+                    status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
+                    if status != noErr {
+                        print("creating new midi note event \(status)")
+                    }
+                    beat += 1
+                }
+            }
+            // associate the AUGraph with the sequence.
+            //        MusicSequenceSetAUGraph(musicSequence, self.processingGraph)
+            
+            // Let's see it
+            CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence))
+            
+            return musicSequence
         }
         
-        // associate the AUGraph with the sequence.
-        //        MusicSequenceSetAUGraph(musicSequence, self.processingGraph)
-        
-        // Let's see it
-        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence))
-        
-        return musicSequence
+        return nil
     }
     
 }

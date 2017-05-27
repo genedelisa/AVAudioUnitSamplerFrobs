@@ -24,15 +24,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sampler1 = Sampler1()
-        
-        samplerSequence = SamplerSequence()
-        
+//        sampler1 = Sampler1()
+//        
+//        samplerSequence = SamplerSequence()
+//        
         samplerSequenceOTF = SamplerSequenceOTF()
         
-        drumMachine = DrumMachine()
+//        drumMachine = DrumMachine()
         
-        duet = Duet()
+//        duet = Duet()
 
     }
 
@@ -42,31 +42,31 @@ class ViewController: UIViewController {
     }
 
 
-    @IBAction func sampler1Down(sender: UIButton) {
+    @IBAction func sampler1Down(_ sender: UIButton) {
         sampler1.play()
     }
     
-    @IBAction func sampler1Up(sender: UIButton) {
+    @IBAction func sampler1Up(_ sender: UIButton) {
         sampler1.stop()
     }
     
-    @IBAction func samplerSequence(sender: UIButton) {
+    @IBAction func samplerSequence(_ sender: UIButton) {
         samplerSequence.play()
     }
     
-    @IBAction func samplerSequenceOTF(sender: UIButton) {
+    @IBAction func samplerSequenceOTF(_ sender: UIButton) {
         samplerSequenceOTF.play()
     }
 
     
-    @IBAction func drumMachinePlay(sender: UIButton) {
+    @IBAction func drumMachinePlay(_ sender: UIButton) {
         drumMachine.play()
     }
 
-    @IBAction func duetDown(sender: UIButton) {
+    @IBAction func duetDown(_ sender: UIButton) {
         duet.play()
     }
-    @IBAction func duetUp(sender: UIButton) {
+    @IBAction func duetUp(_ sender: UIButton) {
         duet.stop()
     }
     

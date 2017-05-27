@@ -24,11 +24,11 @@ class Duet : NSObject {
         engine = AVAudioEngine()
         
         sampler = AVAudioUnitSampler()
-        engine.attachNode(sampler)
+        engine.attach(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
         
         sampler2 = AVAudioUnitSampler()
-        engine.attachNode(sampler2)
+        engine.attach(sampler2)
         engine.connect(sampler2, to: engine.mainMixerNode, format: nil)
         
         loadSF2PresetIntoSampler(0)
@@ -55,15 +55,15 @@ class Duet : NSObject {
         sampler2.stopNote(64, onChannel: 1)
     }
     
-    func loadSF2PresetIntoSampler(preset:UInt8)  {
+    func loadSF2PresetIntoSampler(_ preset:UInt8)  {
         
-        guard let bankURL = NSBundle.mainBundle().URLForResource("GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
             print("could not load sound font")
             return
         }
         
         do {
-            try self.sampler.loadSoundBankInstrumentAtURL(bankURL,
+            try self.sampler.loadSoundBankInstrument(at: bankURL,
                 program: preset,
                 bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
                 bankLSB: UInt8(kAUSampler_DefaultBankLSB))
@@ -73,15 +73,15 @@ class Duet : NSObject {
         
     }
     
-    func loadSF2PresetIntoSampler2(preset:UInt8)  {
+    func loadSF2PresetIntoSampler2(_ preset:UInt8)  {
         
-        guard let bankURL = NSBundle.mainBundle().URLForResource("GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
             print("could not load sound font")
             return
         }
         
         do {
-            try self.sampler2.loadSoundBankInstrumentAtURL(bankURL,
+            try self.sampler2.loadSoundBankInstrument(at: bankURL,
                 program: preset,
                 bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
                 bankLSB: UInt8(kAUSampler_DefaultBankLSB))
@@ -95,7 +95,7 @@ class Duet : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -111,7 +111,7 @@ class Duet : NSObject {
     
     func startEngine() {
         
-        if engine.running {
+        if engine.isRunning {
             print("audio engine already started")
             return
         }
@@ -128,80 +128,80 @@ class Duet : NSObject {
     //MARK: - Notifications
     
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"engineConfigurationChange:",
-            name:AVAudioEngineConfigurationChangeNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(Duet.engineConfigurationChange(_:)),
+            name:NSNotification.Name.AVAudioEngineConfigurationChange,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionInterrupted:",
-            name:AVAudioSessionInterruptionNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(Duet.sessionInterrupted(_:)),
+            name:NSNotification.Name.AVAudioSessionInterruption,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionRouteChange:",
-            name:AVAudioSessionRouteChangeNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(Duet.sessionRouteChange(_:)),
+            name:NSNotification.Name.AVAudioSessionRouteChange,
             object:engine)
     }
     
     func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioEngineConfigurationChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioEngineConfigurationChange,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionInterruptionNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionInterruption,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionRouteChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionRouteChange,
             object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(notification:NSNotification) {
+    func engineConfigurationChange(_ notification:Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(notification:NSNotification) {
+    func sessionInterrupted(_ notification:Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
             let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
             switch reason {
-            case .Began:
+            case .began:
                 print("began")
-            case .Ended:
+            case .ended:
                 print("ended")
             }
         }
     }
     
-    func sessionRouteChange(notification:NSNotification) {
+    func sessionRouteChange(_ notification:Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
                 print("audio session route change reason \(reason)")
                 
                 switch reason {
-                case .CategoryChange: print("CategoryChange")
-                case .NewDeviceAvailable:print("NewDeviceAvailable")
-                case .NoSuitableRouteForCategory:print("NoSuitableRouteForCategory")
-                case .OldDeviceUnavailable:print("OldDeviceUnavailable")
-                case .Override: print("Override")
-                case .WakeFromSleep:print("WakeFromSleep")
-                case .Unknown:print("Unknown")
-                case .RouteConfigurationChange:print("RouteConfigurationChange")
+                case .categoryChange: print("CategoryChange")
+                case .newDeviceAvailable:print("NewDeviceAvailable")
+                case .noSuitableRouteForCategory:print("NoSuitableRouteForCategory")
+                case .oldDeviceUnavailable:print("OldDeviceUnavailable")
+                case .override: print("Override")
+                case .wakeFromSleep:print("WakeFromSleep")
+                case .unknown:print("Unknown")
+                case .routeConfigurationChange:print("RouteConfigurationChange")
                 }
             }
             

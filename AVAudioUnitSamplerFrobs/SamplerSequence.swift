@@ -24,7 +24,7 @@ class SamplerSequence : NSObject {
         engine = AVAudioEngine()
         
         sampler = AVAudioUnitSampler()
-        engine.attachNode(sampler)
+        engine.attach(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
         
         setupSequencer()
@@ -46,10 +46,10 @@ class SamplerSequence : NSObject {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
-        let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic2", withExtension: "mid") {
+        let options = AVMusicSequenceLoadOptions()
+        if let fileURL = Bundle.main.url(forResource: "chromatic2", withExtension: "mid") {
             do {
-                try sequencer.loadFromURL(fileURL, options: options)
+                try sequencer.load(from: fileURL, options: options)
                 print("loaded \(fileURL)")
             } catch {
                 print("something screwed up \(error)")
@@ -62,11 +62,11 @@ class SamplerSequence : NSObject {
     }
     
     func play() {
-        if sequencer.playing {
+        if sequencer.isPlaying {
             stop()
         }
         
-        sequencer.currentPositionInBeats = NSTimeInterval(0)
+        sequencer.currentPositionInBeats = TimeInterval(0)
         
         do {
             try sequencer.start()
@@ -88,9 +88,9 @@ class SamplerSequence : NSObject {
     //if you name your sample violinC4.wav, your sample will be assigned to note number 60.
     func loadSamples() {
         
-        if let urls = NSBundle.mainBundle().URLsForResourcesWithExtension("wav", subdirectory: "wavs") {
+        if let urls = Bundle.main.urls(forResourcesWithExtension: "wav", subdirectory: "wavs") {
             do {
-                try sampler.loadAudioFilesAtURLs(urls)
+                try sampler.loadAudioFiles(at: urls)
                 
                 for u in urls {
                     print("loaded wav \(u)")
@@ -102,15 +102,15 @@ class SamplerSequence : NSObject {
         }
     }
     
-    func loadSF2PresetIntoSampler(preset:UInt8)  {
+    func loadSF2PresetIntoSampler(_ preset:UInt8)  {
         
-        guard let bankURL = NSBundle.mainBundle().URLForResource("GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
             print("could not load sound font")
             return
         }
         
         do {
-            try self.sampler.loadSoundBankInstrumentAtURL(bankURL,
+            try self.sampler.loadSoundBankInstrument(at: bankURL,
                 program: preset,
                 bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
                 bankLSB: UInt8(kAUSampler_DefaultBankLSB))
@@ -126,7 +126,7 @@ class SamplerSequence : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -142,7 +142,7 @@ class SamplerSequence : NSObject {
     
     func startEngine() {
         
-        if engine.running {
+        if engine.isRunning {
             print("audio engine already started")
             return
         }
@@ -159,80 +159,80 @@ class SamplerSequence : NSObject {
     //MARK: - Notifications
     
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"engineConfigurationChange:",
-            name:AVAudioEngineConfigurationChangeNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(SamplerSequence.engineConfigurationChange(_:)),
+            name:NSNotification.Name.AVAudioEngineConfigurationChange,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionInterrupted:",
-            name:AVAudioSessionInterruptionNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(SamplerSequence.sessionInterrupted(_:)),
+            name:NSNotification.Name.AVAudioSessionInterruption,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionRouteChange:",
-            name:AVAudioSessionRouteChangeNotification,
+        NotificationCenter.default.addObserver(self,
+            selector:#selector(SamplerSequence.sessionRouteChange(_:)),
+            name:NSNotification.Name.AVAudioSessionRouteChange,
             object:engine)
     }
     
     func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioEngineConfigurationChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioEngineConfigurationChange,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionInterruptionNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionInterruption,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionRouteChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionRouteChange,
             object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(notification:NSNotification) {
+    func engineConfigurationChange(_ notification:Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(notification:NSNotification) {
+    func sessionInterrupted(_ notification:Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
             let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
             switch reason {
-            case .Began:
+            case .began:
                 print("began")
-            case .Ended:
+            case .ended:
                 print("ended")
             }
         }
     }
     
-    func sessionRouteChange(notification:NSNotification) {
+    func sessionRouteChange(_ notification:Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
                 print("audio session route change reason \(reason)")
                 
                 switch reason {
-                case .CategoryChange: print("CategoryChange")
-                case .NewDeviceAvailable:print("NewDeviceAvailable")
-                case .NoSuitableRouteForCategory:print("NoSuitableRouteForCategory")
-                case .OldDeviceUnavailable:print("OldDeviceUnavailable")
-                case .Override: print("Override")
-                case .WakeFromSleep:print("WakeFromSleep")
-                case .Unknown:print("Unknown")
-                case .RouteConfigurationChange:print("RouteConfigurationChange")
+                case .categoryChange: print("CategoryChange")
+                case .newDeviceAvailable:print("NewDeviceAvailable")
+                case .noSuitableRouteForCategory:print("NoSuitableRouteForCategory")
+                case .oldDeviceUnavailable:print("OldDeviceUnavailable")
+                case .override: print("Override")
+                case .wakeFromSleep:print("WakeFromSleep")
+                case .unknown:print("Unknown")
+                case .routeConfigurationChange:print("RouteConfigurationChange")
                 }
             }
             

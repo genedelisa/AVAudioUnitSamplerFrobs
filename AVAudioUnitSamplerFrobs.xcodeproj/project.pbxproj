@@ -25,12 +25,12 @@
 		B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0A1008C1C46A3770092CBE9 /* chromatic.mid */; };
 		B0A1008F1C46A93C0092CBE9 /* SamplerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */; };
 		B0A100921C4715BD0092CBE9 /* Drums.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = B0A100901C4715BD0092CBE9 /* Drums.aupreset */; };
-		B0A100931C4715BD0092CBE9 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = B0A100911C4715BD0092CBE9 /* Sounds */; };
 		B0A100951C4715E00092CBE9 /* DrumMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100941C4715E00092CBE9 /* DrumMachine.swift */; };
 		B0A100971C47BA990092CBE9 /* Duet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100961C47BA990092CBE9 /* Duet.swift */; };
 		B0BD4E3F1C6621FA00B84077 /* chromatic2.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0BD4E3E1C6621FA00B84077 /* chromatic2.mid */; };
 		B0BD4E411C662A5E00B84077 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0BD4E401C662A5E00B84077 /* CoreAudio.framework */; };
 		B0BD4E4B1C6694FE00B84077 /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B0BD4E4A1C6694FE00B84077 /* FluidR3 GM2-2.SF2 */; };
+		B0FBC1511DE3127C004906D9 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = B0FBC1501DE3127C004906D9 /* Sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,12 +76,12 @@
 		B0A1008C1C46A3770092CBE9 /* chromatic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic.mid; sourceTree = "<group>"; };
 		B0A1008E1C46A93C0092CBE9 /* SamplerSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplerSequence.swift; sourceTree = "<group>"; };
 		B0A100901C4715BD0092CBE9 /* Drums.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Drums.aupreset; path = AVAudioUnitSamplerFrobs/Drums.aupreset; sourceTree = "<group>"; };
-		B0A100911C4715BD0092CBE9 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = AVAudioUnitSamplerFrobs/Sounds; sourceTree = "<group>"; };
 		B0A100941C4715E00092CBE9 /* DrumMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrumMachine.swift; sourceTree = "<group>"; };
 		B0A100961C47BA990092CBE9 /* Duet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duet.swift; sourceTree = "<group>"; };
 		B0BD4E3E1C6621FA00B84077 /* chromatic2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic2.mid; sourceTree = "<group>"; };
 		B0BD4E401C662A5E00B84077 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		B0BD4E4A1C6694FE00B84077 /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
+		B0FBC1501DE3127C004906D9 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = AVAudioUnitSamplerFrobs/Sounds; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				B0BD4E401C662A5E00B84077 /* CoreAudio.framework */,
+				B0FBC1501DE3127C004906D9 /* Sounds */,
 				B0A100901C4715BD0092CBE9 /* Drums.aupreset */,
-				B0A100911C4715BD0092CBE9 /* Sounds */,
 				B0A100881C469C830092CBE9 /* wavs */,
 				B0A1004C1C4688A70092CBE9 /* AVAudioUnitSamplerFrobs */,
 				B0A1006A1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests */,
@@ -250,18 +250,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
 					B0A100491C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4UDK2944TW;
+						LastSwiftMigration = 0810;
 					};
 					B0A100661C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4UDK2944TW;
+						LastSwiftMigration = 0810;
 						TestTargetID = B0A100491C4688A70092CBE9;
 					};
 					B0A100711C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4UDK2944TW;
+						LastSwiftMigration = 0810;
 						TestTargetID = B0A100491C4688A70092CBE9;
 					};
 				};
@@ -297,8 +303,8 @@
 				B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */,
 				B0BD4E3F1C6621FA00B84077 /* chromatic2.mid in Resources */,
 				B0A1008B1C469E720092CBE9 /* sibeliusGMajor.mid in Resources */,
+				B0FBC1511DE3127C004906D9 /* Sounds in Resources */,
 				B0A100611C4688A70092CBE9 /* LaunchScreen.storyboard in Resources */,
-				B0A100931C4715BD0092CBE9 /* Sounds in Resources */,
 				B0A100921C4715BD0092CBE9 /* Drums.aupreset in Resources */,
 				B0A1005C1C4688A70092CBE9 /* Main.storyboard in Resources */,
 				B0BD4E4B1C6694FE00B84077 /* FluidR3 GM2-2.SF2 in Resources */,
@@ -403,8 +409,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -448,8 +456,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -468,6 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -477,10 +488,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -488,10 +501,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -499,10 +514,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVAudioUnitSamplerFrobs.app/AVAudioUnitSamplerFrobs";
 			};
 			name = Debug;
@@ -511,10 +528,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVAudioUnitSamplerFrobs.app/AVAudioUnitSamplerFrobs";
 			};
 			name = Release;
@@ -522,10 +541,12 @@
 		B0A100821C4688A70092CBE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = AVAudioUnitSamplerFrobs;
 				USES_XCTRUNNER = YES;
 			};
@@ -534,10 +555,12 @@
 		B0A100831C4688A70092CBE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = AVAudioUnitSamplerFrobsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = AVAudioUnitSamplerFrobs;
 				USES_XCTRUNNER = YES;
 			};

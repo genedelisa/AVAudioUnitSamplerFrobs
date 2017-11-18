@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://travis-ci.org/genedelisa/AVAudioUnitSamplerFrobs)
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
 [![GitHub release](https://img.shields.io/github/release/genedelisa/AVAudioUnitSamplerFrobs.svg)](https://github.com/genedelisa/AVAudioUnitSamplerFrobs/)
-[![Swift 3](https://img.shields.io/badge/swift3-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
+[![Swift 4](https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
 
 
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](https://swift.org/)

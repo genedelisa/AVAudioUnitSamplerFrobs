@@ -9,13 +9,13 @@
 import Foundation
 import AVFoundation
 
-class DrumMachine : NSObject {
+class DrumMachine: NSObject {
     
     var engine: AVAudioEngine!
     
     var sampler: AVAudioUnitSampler!
     
-    var sequencer:AVAudioSequencer!
+    var sequencer: AVAudioSequencer!
     
     override init() {
         super.init()
@@ -79,7 +79,7 @@ class DrumMachine : NSObject {
     
     // load from the bundle or documents directory only
     // https://forums.developer.apple.com/message/20748#20643
-    func loadPreset()  {
+    func loadPreset() {
         
         guard let preset = Bundle.main.url(forResource: "Drums", withExtension: "aupreset") else {
             print("could not load aupreset")
@@ -129,23 +129,23 @@ class DrumMachine : NSObject {
         }
     }
     
-    //MARK: - Notifications
+    // MARK: - Notifications
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-                                               selector:#selector(DrumMachine.engineConfigurationChange(_:)),
-                                               name:NSNotification.Name.AVAudioEngineConfigurationChange,
-                                               object:engine)
+                                               selector: #selector(DrumMachine.engineConfigurationChange(_:)),
+                                               name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector:#selector(DrumMachine.sessionInterrupted(_:)),
-                                               name:NSNotification.Name.AVAudioSessionInterruption,
-                                               object:engine)
+                                               selector: #selector(DrumMachine.sessionInterrupted(_:)),
+                                               name: NSNotification.Name.AVAudioSessionInterruption,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector:#selector(DrumMachine.sessionRouteChange(_:)),
-                                               name:NSNotification.Name.AVAudioSessionRouteChange,
-                                               object:engine)
+                                               selector: #selector(DrumMachine.sessionRouteChange(_:)),
+                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               object: engine)
     }
     
     func removeObservers() {
@@ -164,34 +164,35 @@ class DrumMachine : NSObject {
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(_ notification:Notification) {
+    @objc func engineConfigurationChange(_ notification: Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(_ notification:Notification) {
+    @objc func sessionInterrupted(_ notification: Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,Any?> {
-            let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
-            switch reason {
-            case .began:
-                print("began")
-            case .ended:
-                print("ended")
+        if let userInfo = notification.userInfo as? [String: Any?] {
+            if let reason = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSessionInterruptionType {
+                switch reason {
+                case .began:
+                    print("began")
+                case .ended:
+                    print("ended")
+                }
             }
         }
     }
     
-    func sessionRouteChange(_ notification:Notification) {
+    @objc func sessionRouteChange(_ notification: Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,Any?> {
+        if let userInfo = notification.userInfo as? [String: Any?] {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
@@ -218,16 +219,16 @@ class DrumMachine : NSObject {
     
     func createMusicSequence() -> MusicSequence? {
         
-        var s:MusicSequence?
+        var s: MusicSequence?
         var status = NewMusicSequence(&s)
         if status != noErr {
             print("\(#line) bad status \(status) creating sequence")
         }
         
         if let musicSequence = s {
-
+            
             // add a track
-            var t:MusicTrack?
+            var t: MusicTrack?
             status = MusicSequenceNewTrack(musicSequence, &t)
             if status != noErr {
                 print("error creating track \(status)")
@@ -256,7 +257,7 @@ class DrumMachine : NSObject {
                 
                 // now make some notes and put them on the track
                 var beat = MusicTimeStamp(0.0)
-                for i:UInt8 in 60...72 {
+                for i: UInt8 in 60...72 {
                     var mess = MIDINoteMessage(channel: 0,
                                                note: i,
                                                velocity: 64,

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B007FA9A1FC0BC7A00943593 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B007FA981FC0BC7A00943593 /* .swiftlint.yml */; };
+		B007FA9B1FC0BC7A00943593 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = B007FA991FC0BC7A00943593 /* .swift-version */; };
 		B096DD091C47DEEE00A8CC7A /* SamplerSequenceOTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */; };
 		B0A1004E1C4688A70092CBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */; };
 		B0A100501C4688A70092CBE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1004F1C4688A70092CBE9 /* ViewController.swift */; };
@@ -19,7 +21,6 @@
 		B0A1006C1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1006B1C4688A70092CBE9 /* AVAudioUnitSamplerFrobsTests.swift */; };
 		B0A100771C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100761C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift */; };
 		B0A100851C4688BE0092CBE9 /* Sampler1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A100841C4688BE0092CBE9 /* Sampler1.swift */; };
-		B0A100871C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		B0A100891C469C830092CBE9 /* wavs in Resources */ = {isa = PBXBuildFile; fileRef = B0A100881C469C830092CBE9 /* wavs */; };
 		B0A1008B1C469E720092CBE9 /* sibeliusGMajor.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */; };
 		B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0A1008C1C46A3770092CBE9 /* chromatic.mid */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B007FA981FC0BC7A00943593 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B007FA991FC0BC7A00943593 /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
 		B096DD081C47DEEE00A8CC7A /* SamplerSequenceOTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplerSequenceOTF.swift; sourceTree = "<group>"; };
 		B0A1004A1C4688A70092CBE9 /* AVAudioUnitSamplerFrobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVAudioUnitSamplerFrobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +73,6 @@
 		B0A100761C4688A70092CBE9 /* AVAudioUnitSamplerFrobsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioUnitSamplerFrobsUITests.swift; sourceTree = "<group>"; };
 		B0A100781C4688A70092CBE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0A100841C4688BE0092CBE9 /* Sampler1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sampler1.swift; sourceTree = "<group>"; };
-		B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
 		B0A100881C469C830092CBE9 /* wavs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = wavs; path = AVAudioUnitSamplerFrobs/wavs; sourceTree = "<group>"; };
 		B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = sibeliusGMajor.mid; sourceTree = "<group>"; };
 		B0A1008C1C46A3770092CBE9 /* chromatic.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic.mid; sourceTree = "<group>"; };
@@ -113,6 +115,8 @@
 		B0A100411C4688A70092CBE9 = {
 			isa = PBXGroup;
 			children = (
+				B007FA991FC0BC7A00943593 /* .swift-version */,
+				B007FA981FC0BC7A00943593 /* .swiftlint.yml */,
 				B0BD4E401C662A5E00B84077 /* CoreAudio.framework */,
 				B0FBC1501DE3127C004906D9 /* Sounds */,
 				B0A100901C4715BD0092CBE9 /* Drums.aupreset */,
@@ -141,7 +145,6 @@
 				B0BD4E3E1C6621FA00B84077 /* chromatic2.mid */,
 				B0A1008C1C46A3770092CBE9 /* chromatic.mid */,
 				B0A1008A1C469E720092CBE9 /* sibeliusGMajor.mid */,
-				B0A100861C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 */,
 				B0A1004D1C4688A70092CBE9 /* AppDelegate.swift */,
 				B0A1004F1C4688A70092CBE9 /* ViewController.swift */,
 				B0A1005A1C4688A70092CBE9 /* Main.storyboard */,
@@ -194,6 +197,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0A1007B1C4688A70092CBE9 /* Build configuration list for PBXNativeTarget "AVAudioUnitSamplerFrobs" */;
 			buildPhases = (
+				B007FA9C1FC0BCB300943593 /* ShellScript */,
 				B0A100461C4688A70092CBE9 /* Sources */,
 				B0A100471C4688A70092CBE9 /* Frameworks */,
 				B0A100481C4688A70092CBE9 /* Resources */,
@@ -250,24 +254,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
 					B0A100491C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 4UDK2944TW;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0910;
 					};
 					B0A100661C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 4UDK2944TW;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0910;
 						TestTargetID = B0A100491C4688A70092CBE9;
 					};
 					B0A100711C4688A70092CBE9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 4UDK2944TW;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0910;
 						TestTargetID = B0A100491C4688A70092CBE9;
 					};
 				};
@@ -301,15 +305,16 @@
 				B0A100571C4688A70092CBE9 /* .gitignore in Resources */,
 				B0A100551C4688A70092CBE9 /* LICENSE in Resources */,
 				B0A1008D1C46A3770092CBE9 /* chromatic.mid in Resources */,
+				B007FA9B1FC0BC7A00943593 /* .swift-version in Resources */,
 				B0BD4E3F1C6621FA00B84077 /* chromatic2.mid in Resources */,
 				B0A1008B1C469E720092CBE9 /* sibeliusGMajor.mid in Resources */,
 				B0FBC1511DE3127C004906D9 /* Sounds in Resources */,
 				B0A100611C4688A70092CBE9 /* LaunchScreen.storyboard in Resources */,
 				B0A100921C4715BD0092CBE9 /* Drums.aupreset in Resources */,
 				B0A1005C1C4688A70092CBE9 /* Main.storyboard in Resources */,
+				B007FA9A1FC0BC7A00943593 /* .swiftlint.yml in Resources */,
 				B0BD4E4B1C6694FE00B84077 /* FluidR3 GM2-2.SF2 in Resources */,
 				B0A100891C469C830092CBE9 /* wavs in Resources */,
-				B0A100871C468BF40092CBE9 /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				B0A1005E1C4688A70092CBE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +334,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B007FA9C1FC0BCB300943593 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B0A100461C4688A70092CBE9 /* Sources */ = {
@@ -404,14 +425,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -439,6 +466,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -451,14 +479,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -479,6 +513,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -493,7 +528,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -506,7 +542,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -519,7 +556,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVAudioUnitSamplerFrobs.app/AVAudioUnitSamplerFrobs";
 			};
 			name = Debug;
@@ -533,7 +571,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVAudioUnitSamplerFrobs.app/AVAudioUnitSamplerFrobs";
 			};
 			name = Release;
@@ -546,7 +585,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = AVAudioUnitSamplerFrobs;
 				USES_XCTRUNNER = YES;
 			};
@@ -560,7 +600,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.AVAudioUnitSamplerFrobsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = AVAudioUnitSamplerFrobs;
 				USES_XCTRUNNER = YES;
 			};

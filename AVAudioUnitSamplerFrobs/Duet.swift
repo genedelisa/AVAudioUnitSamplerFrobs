@@ -10,7 +10,7 @@
 import Foundation
 import AVFoundation
 
-class Duet : NSObject {
+class Duet {
     
     var engine: AVAudioEngine!
     
@@ -18,8 +18,7 @@ class Duet : NSObject {
     
     var sampler2: AVAudioUnitSampler!
     
-    override init() {
-        super.init()
+    init() {
         
         engine = AVAudioEngine()
         
@@ -44,6 +43,10 @@ class Duet : NSObject {
         setSessionPlayback()
     }
     
+    deinit {
+        removeObservers()
+    }
+    
     
     func play() {
         sampler.startNote(60, withVelocity: 64, onChannel: 0)
@@ -55,36 +58,36 @@ class Duet : NSObject {
         sampler2.stopNote(64, onChannel: 1)
     }
     
-    func loadSF2PresetIntoSampler(_ preset:UInt8)  {
+    func loadSF2PresetIntoSampler(_ preset: UInt8) {
         
-        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+        guard let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2") else {
             print("could not load sound font")
             return
         }
         
         do {
             try self.sampler.loadSoundBankInstrument(at: bankURL,
-                program: preset,
-                bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
-                bankLSB: UInt8(kAUSampler_DefaultBankLSB))
+                                                     program: preset,
+                                                     bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
+                                                     bankLSB: UInt8(kAUSampler_DefaultBankLSB))
         } catch {
             print("error loading sound bank instrument")
         }
         
     }
     
-    func loadSF2PresetIntoSampler2(_ preset:UInt8)  {
+    func loadSF2PresetIntoSampler2(_ preset: UInt8) {
         
-        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+        guard let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2") else {
             print("could not load sound font")
             return
         }
         
         do {
             try self.sampler2.loadSoundBankInstrument(at: bankURL,
-                program: preset,
-                bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
-                bankLSB: UInt8(kAUSampler_DefaultBankLSB))
+                                                      program: preset,
+                                                      bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
+                                                      bankLSB: UInt8(kAUSampler_DefaultBankLSB))
         } catch {
             print("error loading sound bank instrument")
         }
@@ -125,69 +128,74 @@ class Duet : NSObject {
         }
     }
     
-    //MARK: - Notifications
+    // MARK: - Notifications
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-            selector:#selector(Duet.engineConfigurationChange(_:)),
-            name:NSNotification.Name.AVAudioEngineConfigurationChange,
-            object:engine)
+                                               selector: #selector(Duet.engineConfigurationChange(_:)),
+                                               name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(Duet.sessionInterrupted(_:)),
-            name:NSNotification.Name.AVAudioSessionInterruption,
-            object:engine)
+                                               selector: #selector(Duet.sessionInterrupted(_:)),
+                                               name: NSNotification.Name.AVAudioSessionInterruption,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(Duet.sessionRouteChange(_:)),
-            name:NSNotification.Name.AVAudioSessionRouteChange,
-            object:engine)
+                                               selector: #selector(Duet.sessionRouteChange(_:)),
+                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               object: engine)
     }
     
     func removeObservers() {
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioEngineConfigurationChange,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                                  object: nil)
         
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioSessionInterruption,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioSessionInterruption,
+                                                  object: nil)
         
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioSessionRouteChange,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioSessionRouteChange,
+                                                  object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(_ notification:Notification) {
+    
+    @objc
+    func engineConfigurationChange(_ notification: Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(_ notification:Notification) {
+    @objc
+    func sessionInterrupted(_ notification: Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
-            let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
-            switch reason {
-            case .began:
-                print("began")
-            case .ended:
-                print("ended")
+        if let userInfo = notification.userInfo as? [String: Any?] {
+            if let reason = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSessionInterruptionType {
+                switch reason {
+                case .began:
+                    print("began")
+                case .ended:
+                    print("ended")
+                }
             }
         }
     }
     
-    func sessionRouteChange(_ notification:Notification) {
+    @objc
+    func sessionRouteChange(_ notification: Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
+        if let userInfo = notification.userInfo as? [String: Any?] {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
@@ -205,8 +213,9 @@ class Duet : NSObject {
                 }
             }
             
-            let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey]
-            print("audio session route change previous \(previous)")
+            if let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey] {
+                print("audio session route change previous \(String(describing: previous))")
+            }
         }
     }
     

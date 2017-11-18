@@ -1,6 +1,6 @@
 # file: .travis.yml
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9
 xcode_project: AVAudioUnitSamplerFrobs
 
 before_install:

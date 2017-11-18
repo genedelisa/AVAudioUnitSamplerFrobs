@@ -10,38 +10,36 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var sampler1:Sampler1!
+    var sampler1: Sampler1!
     
-    var samplerSequence:SamplerSequence!
+    var samplerSequence: SamplerSequence!
     
-    var samplerSequenceOTF:SamplerSequenceOTF!
+    var samplerSequenceOTF: SamplerSequenceOTF!
     
-    var drumMachine:DrumMachine!
+    var drumMachine: DrumMachine!
     
-    var duet:Duet!
+    var duet: Duet!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        sampler1 = Sampler1()
-//        
-//        samplerSequence = SamplerSequence()
-//        
+        
+        sampler1 = Sampler1()
+        
+        samplerSequence = SamplerSequence()
+        
         samplerSequenceOTF = SamplerSequenceOTF()
         
-//        drumMachine = DrumMachine()
+        drumMachine = DrumMachine()
         
-//        duet = Duet()
-
+        duet = Duet()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
     @IBAction func sampler1Down(_ sender: UIButton) {
         sampler1.play()
     }
@@ -57,12 +55,11 @@ class ViewController: UIViewController {
     @IBAction func samplerSequenceOTF(_ sender: UIButton) {
         samplerSequenceOTF.play()
     }
-
     
     @IBAction func drumMachinePlay(_ sender: UIButton) {
         drumMachine.play()
     }
-
+    
     @IBAction func duetDown(_ sender: UIButton) {
         duet.play()
     }
@@ -70,8 +67,7 @@ class ViewController: UIViewController {
         duet.stop()
     }
     
-
-
+    
+    
     
 }
-

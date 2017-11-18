@@ -447,23 +447,23 @@
 	<key>file-references</key>
 	<dict>
 		<key>Sample:268435457</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/clap-808.wav</string>
+		<string>/Sounds/clap-808.wav</string>
 		<key>Sample:268435458</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/cowbell-808.wav</string>
+		<string>/Sounds/cowbell-808.wav</string>
 		<key>Sample:268435459</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/crash-808.wav</string>
+		<string>/Sounds/crash-808.wav</string>
 		<key>Sample:268435460</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/hihat-808.wav</string>
+		<string>/Sounds/hihat-808.wav</string>
 		<key>Sample:268435461</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/kick-808.wav</string>
+		<string>/Sounds/kick-808.wav</string>
 		<key>Sample:268435462</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/openhat-808.wav</string>
+		<string>/Sounds/openhat-808.wav</string>
 		<key>Sample:268435463</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/perc-808.wav</string>
+		<string>/Sounds/perc-808.wav</string>
 		<key>Sample:268435464</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/snare-808.wav</string>
+		<string>/Sounds/snare-808.wav</string>
 		<key>Sample:268435465</key>
-		<string>/Users/gene/Downloads/[99Sounds] 99 Drum Samples/Samples/tom-808.wav</string>
+		<string>/Sounds/tom-808.wav</string>
 	</dict>
 	<key>file-secure-references</key>
 	<dict>

@@ -10,23 +10,22 @@ import Foundation
 import AVFoundation
 import AudioToolbox
 
-class SamplerSequenceOTF : NSObject {
+class SamplerSequenceOTF {
     
     var engine: AVAudioEngine!
     
     var sampler: AVAudioUnitSampler!
     
-        var sequencer:AVAudioSequencer!
-
-    override init() {
-        super.init()
+    var sequencer: AVAudioSequencer!
+    
+    init() {
         
         engine = AVAudioEngine()
         
         sampler = AVAudioUnitSampler()
         engine.attach(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
-
+        
         setupSequencer()
         
         loadSamples()
@@ -38,6 +37,10 @@ class SamplerSequenceOTF : NSObject {
         print(self.engine)
         
         setSessionPlayback()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     
@@ -92,7 +95,7 @@ class SamplerSequenceOTF : NSObject {
                 for u in urls {
                     print("loaded wav \(u)")
                 }
-
+                
             } catch let error as NSError {
                 print("\(error.localizedDescription)")
             }
@@ -104,7 +107,8 @@ class SamplerSequenceOTF : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback,
+                                         with: AVAudioSessionCategoryOptions.mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -134,69 +138,74 @@ class SamplerSequenceOTF : NSObject {
         }
     }
     
-    //MARK: - Notifications
+    // MARK: - Notifications
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SamplerSequenceOTF.engineConfigurationChange(_:)),
-            name:NSNotification.Name.AVAudioEngineConfigurationChange,
-            object:engine)
+                                               selector: #selector(SamplerSequenceOTF.engineConfigurationChange(_:)),
+                                               name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SamplerSequenceOTF.sessionInterrupted(_:)),
-            name:NSNotification.Name.AVAudioSessionInterruption,
-            object:engine)
+                                               selector: #selector(SamplerSequenceOTF.sessionInterrupted(_:)),
+                                               name: NSNotification.Name.AVAudioSessionInterruption,
+                                               object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SamplerSequenceOTF.sessionRouteChange(_:)),
-            name:NSNotification.Name.AVAudioSessionRouteChange,
-            object:engine)
+                                               selector: #selector(SamplerSequenceOTF.sessionRouteChange(_:)),
+                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               object: engine)
     }
     
     func removeObservers() {
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioEngineConfigurationChange,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                                  object: nil)
         
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioSessionInterruption,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioSessionInterruption,
+                                                  object: nil)
         
         NotificationCenter.default.removeObserver(self,
-            name: NSNotification.Name.AVAudioSessionRouteChange,
-            object: nil)
+                                                  name: NSNotification.Name.AVAudioSessionRouteChange,
+                                                  object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(_ notification:Notification) {
+    
+    @objc
+    func engineConfigurationChange(_ notification: Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(_ notification:Notification) {
+    @objc
+    func sessionInterrupted(_ notification: Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
-            let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
-            switch reason {
-            case .began:
-                print("began")
-            case .ended:
-                print("ended")
+        if let userInfo = notification.userInfo as? [String: Any?] {
+            if let reason = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSessionInterruptionType {
+                switch reason {
+                case .began:
+                    print("began")
+                case .ended:
+                    print("ended")
+                }
             }
         }
     }
     
-    func sessionRouteChange(_ notification:Notification) {
+    @objc
+    func sessionRouteChange(_ notification: Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject?> {
+        if let userInfo = notification.userInfo as? [String: Any?] {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
@@ -214,18 +223,19 @@ class SamplerSequenceOTF : NSObject {
                 }
             }
             
-            let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey]
-            print("audio session route change previous \(previous)")
+            if let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey] {
+                print("audio session route change previous \(String(describing: previous))")
+            }
         }
     }
     
-   
+    
     
     func createMusicSequence() -> MusicSequence {
         
         var musicSequence: MusicSequence? = nil
         var status = NewMusicSequence(&musicSequence)
-        if status != OSStatus(noErr) {
+        if status != noErr {
             print("\(#line) bad status \(status) creating sequence")
         }
         
@@ -239,14 +249,14 @@ class SamplerSequenceOTF : NSObject {
         
         // now make some notes and put them on the track
         var beat = MusicTimeStamp(0.0)
-        for i:UInt8 in 60...72 {
+        for i: UInt8 in 60...72 {
             var mess = MIDINoteMessage(channel: 0,
-                note: i,
-                velocity: 64,
-                releaseVelocity: 0,
-                duration: 1.0 )
+                                       note: i,
+                                       velocity: 64,
+                                       releaseVelocity: 0,
+                                       duration: 1.0 )
             status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
-            if status != OSStatus(noErr) {
+            if status != noErr {
                 print("creating new midi note event \(status)")
             }
             beat += 1
@@ -256,7 +266,7 @@ class SamplerSequenceOTF : NSObject {
         beat = MusicTimeStamp(0.0)
         for _ in 0...16 {
             var mess = MIDINoteMessage(channel: 0,
-                note: 63, //D#4 - see the wav names
+                                       note: 63, //D#4 - see the wav names
                 velocity: 127,
                 releaseVelocity: 0,
                 duration: 0.5 )
@@ -279,22 +289,22 @@ class SamplerSequenceOTF : NSObject {
     /**
      AVAudioSequencer will not load a MusicSequence, but it will load NSData.
      */
-    func sequenceData(_ musicSequence:MusicSequence) -> Data? {
-        var status = OSStatus(noErr)
+    func sequenceData(_ musicSequence: MusicSequence) -> Data? {
+        var status = noErr
         
-        var data:Unmanaged<CFData>?
+        var data: Unmanaged<CFData>?
         status = MusicSequenceFileCreateData(musicSequence,
-            MusicSequenceFileTypeID.midiType,
-            MusicSequenceFileFlags.eraseFile,
-            480, &data)
+                                             MusicSequenceFileTypeID.midiType,
+                                             MusicSequenceFileFlags.eraseFile,
+                                             480, &data)
         if status != noErr {
             print("error turning MusicSequence into NSData")
             return nil
         }
         
-        let ns:Data = data!.takeUnretainedValue() as Data
+        let ns: Data = data!.takeUnretainedValue() as Data
         data?.release()
         return ns
     }
-
+    
 }

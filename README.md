@@ -21,6 +21,8 @@ Note: the aupreset references files on my computer. You will need to edit the au
 
 Look at ViewController and comment/uncomment each "performer"
 
+I use the "FluidR3" SoundFont from [Musescore](https://musescore.org/en/handbook/soundfonts). Go to that website and download it. It has an MIT license. Or use a SoundFont of your choice.
+
 
 ## Blog post for this example.
 

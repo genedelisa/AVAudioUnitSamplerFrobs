@@ -12,9 +12,9 @@ import AudioToolbox
 
 class SamplerSequenceOTF {
 
-    var engine: AVAudioEngine!
+    let engine: AVAudioEngine
 
-    var sampler: AVAudioUnitSampler!
+    let sampler: AVAudioUnitSampler
 
     var sequencer: AVAudioSequencer!
 
@@ -45,14 +45,12 @@ class SamplerSequenceOTF {
 
 
     func setupSequencer() {
-
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
 
-        let options = AVMusicSequenceLoadOptions()
         let musicSequence = createMusicSequence()
         if let data = sequenceData(musicSequence) {
             do {
-                try sequencer.load(from: data, options: options)
+                try sequencer.load(from: data, options: [])
                 print("loaded \(data)")
             } catch {
                 print("something screwed up \(error)")
@@ -72,7 +70,7 @@ class SamplerSequenceOTF {
             stop()
         }
 
-        sequencer.currentPositionInBeats = TimeInterval(0)
+        sequencer.currentPositionInBeats = 0
 
         do {
             try sequencer.start()

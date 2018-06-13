@@ -11,9 +11,9 @@ import AVFoundation
 
 class Sampler1 {
 
-    var engine: AVAudioEngine!
+    let engine: AVAudioEngine
 
-    var sampler: AVAudioUnitSampler!
+    let sampler: AVAudioUnitSampler
 
     init() {
 

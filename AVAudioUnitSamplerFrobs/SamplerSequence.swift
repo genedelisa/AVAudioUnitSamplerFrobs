@@ -12,16 +12,14 @@ import AudioToolbox
 
 class SamplerSequence {
 
-    var engine: AVAudioEngine!
+    let engine: AVAudioEngine
 
-    var sampler: AVAudioUnitSampler!
+    let sampler: AVAudioUnitSampler
 
     var sequencer: AVAudioSequencer!
 
     init() {
-
         engine = AVAudioEngine()
-
         sampler = AVAudioUnitSampler()
         engine.attach(sampler)
         engine.connect(sampler, to: engine.mainMixerNode, format: nil)
@@ -49,10 +47,9 @@ class SamplerSequence {
 
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
 
-        let options = AVMusicSequenceLoadOptions()
         if let fileURL = Bundle.main.url(forResource: "chromatic2", withExtension: "mid") {
             do {
-                try sequencer.load(from: fileURL, options: options)
+                try sequencer.load(from: fileURL, options: [])
                 print("loaded \(fileURL)")
             } catch {
                 print("something screwed up \(error)")
@@ -69,7 +66,7 @@ class SamplerSequence {
             stop()
         }
 
-        sequencer.currentPositionInBeats = TimeInterval(0)
+        sequencer.currentPositionInBeats = 0
 
         do {
             try sequencer.start()

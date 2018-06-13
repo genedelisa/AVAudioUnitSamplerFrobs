@@ -43,11 +43,10 @@ class DrumMachine: NSObject {
     func setupSequencer() {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
-        
-        let options = AVMusicSequenceLoadOptions()
+
         if let fileURL = Bundle.main.url(forResource: "chromatic", withExtension: "mid") {
             do {
-                try sequencer.load(from: fileURL, options: options)
+                try sequencer.load(from: fileURL, options: [])
                 print("loaded \(fileURL)")
             } catch {
                 print("something screwed up \(error)")
@@ -64,7 +63,7 @@ class DrumMachine: NSObject {
             stop()
         }
         
-        sequencer.currentPositionInBeats = TimeInterval(0)
+        sequencer.currentPositionInBeats = 0
         
         do {
             try sequencer.start()
@@ -99,7 +98,7 @@ class DrumMachine: NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -133,32 +132,32 @@ class DrumMachine: NSObject {
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(DrumMachine.engineConfigurationChange(_:)),
-                                               name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               selector: #selector(engineConfigurationChange),
+                                               name: .AVAudioEngineConfigurationChange,
                                                object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(DrumMachine.sessionInterrupted(_:)),
-                                               name: NSNotification.Name.AVAudioSessionInterruption,
+                                               selector: #selector(sessionInterrupted),
+                                               name: .AVAudioSessionInterruption,
                                                object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(DrumMachine.sessionRouteChange(_:)),
-                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               selector: #selector(sessionRouteChange),
+                                               name: .AVAudioSessionRouteChange,
                                                object: engine)
     }
     
     func removeObservers() {
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                                  name: .AVAudioEngineConfigurationChange,
                                                   object: nil)
         
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioSessionInterruption,
+                                                  name: .AVAudioSessionInterruption,
                                                   object: nil)
         
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioSessionRouteChange,
+                                                  name: .AVAudioSessionRouteChange,
                                                   object: nil)
     }
     

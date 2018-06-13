@@ -69,7 +69,7 @@ class Sampler1 {
         do {
             try
                 audioSession.setCategory(AVAudioSessionCategoryPlayback,
-                                         with: AVAudioSessionCategoryOptions.mixWithOthers)
+                                         with: .mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -103,32 +103,32 @@ class Sampler1 {
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(Sampler1.engineConfigurationChange(_:)),
-                                               name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                               selector: #selector(engineConfigurationChange),
+                                               name: .AVAudioEngineConfigurationChange,
                                                object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(Sampler1.sessionInterrupted(_:)),
-                                               name: NSNotification.Name.AVAudioSessionInterruption,
+                                               selector: #selector(sessionInterrupted),
+                                               name: .AVAudioSessionInterruption,
                                                object: engine)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(Sampler1.sessionRouteChange(_:)),
-                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               selector: #selector(sessionRouteChange),
+                                               name: .AVAudioSessionRouteChange,
                                                object: engine)
     }
     
     func removeObservers() {
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioEngineConfigurationChange,
+                                                  name: .AVAudioEngineConfigurationChange,
                                                   object: nil)
         
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioSessionInterruption,
+                                                  name: .AVAudioSessionInterruption,
                                                   object: nil)
         
         NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVAudioSessionRouteChange,
+                                                  name: .AVAudioSessionRouteChange,
                                                   object: nil)
     }
     
